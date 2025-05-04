@@ -1,0 +1,58 @@
+<!-- usuarios.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Usuarios</title>
+  <script type="module" src="/public/usuarios.js"></script>
+</head>
+<body>
+  <h1>Lista de Usuarios</h1>
+  
+  <!-- Tabla de usuarios -->
+  <table id="usuarios-tabla">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Celular</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Aquí se llenarán los usuarios -->
+    </tbody>
+  </table>
+
+  <script type="module">
+    // Obtener los usuarios y mostrarlos en la tabla
+    async function cargarUsuarios() {
+      const usuarios = await getUsuarios(); // Llamamos a la función de obtener usuarios
+      const tabla = document.getElementById('usuarios-tabla').getElementsByTagName('tbody')[0];
+      
+      tabla.innerHTML = ''; // Limpiar la tabla antes de agregar los nuevos datos
+
+      // Crear filas para cada usuario
+      usuarios.forEach(usuario => {
+        const row = tabla.insertRow(); // Insertamos una nueva fila
+
+        const cellId = row.insertCell(0);
+        cellId.textContent = usuario.id;
+
+        const cellNombre = row.insertCell(1);
+        cellNombre.textContent = usuario.Nombre;
+
+        const cellEmail = row.insertCell(2);
+        cellEmail.textContent = usuario.Email;
+
+        const cellCelular = row.insertCell(3);
+        cellCelular.textContent = usuario.Celular;
+      });
+    }
+
+    // Llamamos a la función para cargar los usuarios cuando se carga la página
+    window.onload = cargarUsuarios;
+  </script>
+</body>
+</html>
